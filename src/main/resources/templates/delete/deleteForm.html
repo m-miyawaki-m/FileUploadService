@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Delete Confirmation</title>
+</head>
+<body>
+    <h1>Delete Confirmation</h1>
+    <div id="fileDetails">
+        <p>Title: <span id="fileTitle"></span></p>
+        <p>File Name: <span id="fileName"></span></p>
+        <p>Upload Date: <span id="uploadDate"></span></p>
+    </div>
+    <br>
+    <button type="button" id="deleteButton">Delete</button>
+    <button type="button" id="cancelButton">Cancel</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // クエリパラメータから情報を取得
+            const params = new URLSearchParams(window.location.search);
+            const fileTitle = params.get('title');
+            const fileName = params.get('fileName');
+            const uploadDate = params.get('uploadDate');
+            const fileId = params.get('id');
+
+            // HTMLに情報を表示
+            $('#fileTitle').text(fileTitle);
+            $('#fileName').text(fileName);
+            $('#uploadDate').text(uploadDate);
+
+            // 削除ボタンのクリックイベント
+            $('#deleteButton').on('click', function () {
+                if (confirm('Are you sure you want to delete this file?')) {
+                    $.ajax({
+                        url: `/api/files/delete/${fileId}`,
+                        method: 'DELETE',
+                        success: function () {
+                            alert('File deleted successfully.');
+                            window.location.href = '/file/search'; // 検索ページに戻る
+                        },
+                        error: function (err) {
+                            console.error('Error deleting file:', err);
+                            alert('Failed to delete the file. Please try again.');
+                        }
+                    });
+                }
+            });
+
+            // キャンセルボタンのクリックイベント
+            $('#cancelButton').on('click', function () {
+                window.location.href = '/file/search'; // 検索ページに戻る
+            });
+        });
+    </script>
+</body>
+</html>

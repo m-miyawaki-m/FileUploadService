@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>File Search</h1>
+    <form id="searchForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
+        <br><br>
+        <label for="fileName">File Name:</label>
+        <input type="text" id="fileName" name="fileName">
+        <br><br>
+        <label for="uploadDateFrom">Upload Date From:</label>
+        <input type="date" id="uploadDateFrom" name="uploadDateFrom">
+        <br><br>
+        <label for="uploadDateTo">Upload Date To:</label>
+        <input type="date" id="uploadDateTo" name="uploadDateTo">
+        <br><br>
+        <button type="button" id="searchButton">Search</button>
+        <button type="button" id="resetButton">Reset</button>
+    </form>
+    <br>
+    <h2>Search Results</h2>
+    <table border="1" id="resultTable">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Title</th>
+                <th>File Name</th>
+                <th>Upload Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 検索結果がここに追加されます -->
+        </tbody>
+    </table>
+    <br>
+    <button type="button" id="deleteButton" disabled>Delete</button>
+
+    <script src="/search/search.js"></script>
+</body>
+</html>
